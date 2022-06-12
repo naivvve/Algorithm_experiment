@@ -1,4 +1,4 @@
-# 贪心算法实验报告
+# 《贪心算法》实验报告
 
 ## 学号：20201060338
 
@@ -33,9 +33,9 @@
 
 ## 实验内容
 
-1. 用户子输入算法实现的c++版本:
+1. 用户自输入算法实现的c++版本:
        代码网址：https://github.com/naivvve/Algorithm_experiment/tree/main/work_3/beibao1.cpp
-2. 随机数的算法实现的c++版本:
+2. 使用随机数测试的算法实现的c++版本:
        代码网址：https://github.com/naivvve/Algorithm_experiment/tree/main/work_3/beibao2.cpp
 
 ## 实验结果和分析
