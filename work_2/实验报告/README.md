@@ -30,9 +30,9 @@
 ## 实验内容
 
 1. 用户自输入的算法实现的c版本:
-       代码网址：
+       代码网址：https://github.com/naivvve/Algorithm_experiment/blob/main/work_2/knapsack_prob.c
 2. 生成随机数作为输入的算法实现的c版本:
-       代码网址：
+       代码网址：https://github.com/naivvve/Algorithm_experiment/blob/main/work_2/knapsack_prob1.c
 
 ### 实验结果和分析
 #### 1)编程实现以上算法，并进行测试，保证程序正确无误。其中，分别在程序开始和结束处设置记录系统当前时间的变量、用于计算程序执行的时间（以毫秒(ms)作为程序执行时间的计数单位）。
@@ -101,10 +101,10 @@
 
 ## 实验内容
 
-1. 用户自输入的算法实现的c版本:
-       代码网址：
-2. 生成随机数作为输入的算法实现的c版本:
-       代码网址：
+1. DAC_f算法实现的c++版本:
+       代码网址：https://github.com/naivvve/Algorithm_experiment/blob/main/work_2/DAC_f.cpp
+2. DP_f算法实现的c++版本:
+       代码网址：https://github.com/naivvve/Algorithm_experiment/blob/main/work_2/DP_f.cpp
 
 ### 实验结果和分析
 #### 1)“加法”是以上两个斐波纳契数算法的基本操作。编程实现以上 DAC_f和 DP_f 算法，并进行测试，在其中设置加法执行次数的计数器变量。
