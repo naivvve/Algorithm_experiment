@@ -2,39 +2,42 @@
 #include<iomanip>
 #include<time.h>
 #include<stdio.h>
-
+#include <mm_malloc.h>
 #include <string.h>
-using namespace std; //Ëæ»úÊıº¯ÊıÍ·ÎÄ¼ş
-
-void BubbleSort(int num[], int n)//Ã°ÅİÅÅĞò
+using namespace std; //éšæœºæ•°å‡½æ•°å¤´æ–‡ä»¶
+int count1=0,count2=0,count3=0;
+void BubbleSort(int num[], int n)//å†’æ³¡æ’åº
 {
-    for (int i=0; i<n-1; i++)//Á½¸öforÑ­»·ÊµÏÖÅÅĞò
-        for (int j=0; j<n-i-1; j++)
-            if (num[j]>num[j+1])  //µ±Ç°ÔªËØ½Ï´óÊ±
+    for (int i=0; i<n-1; i++)//ä¸¤ä¸ªforå¾ªç¯å®ç°æ’åº
+        for (int j=0; j<n-i-1; j++){
+            count1++;
+            if (num[j]>num[j+1])  //å½“å‰å…ƒç´ è¾ƒå¤§æ—¶
             {
                 int temp=num[j];//exchange
                 num[j]=num[j+1];
                 num[j+1]=temp;
             }
+        }
 }
 
-void merge(int num[],int left[],int right[],int l,int r)//Á½¸öÓĞĞòĞòÁĞµÄºÏ²¢
+void merge(int num[],int left[],int right[],int l,int r)//ä¸¤ä¸ªæœ‰åºåºåˆ—çš„åˆå¹¶
 {
     int i=0,j=0,p=0;
-    while(i<l&&j<r)//½ÏĞ¡µÄ·ÅÈënum
+    while(i<l&&j<r)//è¾ƒå°çš„æ”¾å…¥num
     {
+        count2++;
         if(left[i]<=right[j])
             num[p++]=left[i++];
         else
             num[p++]=right[j++];
     }
-    while(i<l)//½«Ê£ÓàÔªËØ·ÅÈënum
+    while(i<l)//å°†å‰©ä½™å…ƒç´ æ”¾å…¥num
         num[p++]=left[i++];
     while(j<r)
         num[p++]=right[j++];
 }
 
-void mergeSort(int num[],int n)//ºÏ²¢ÅÅĞò
+void mergeSort(int num[],int n)//åˆå¹¶æ’åº
 {
     if(n>1)
     {
@@ -48,38 +51,42 @@ void mergeSort(int num[],int n)//ºÏ²¢ÅÅĞò
         {
             right[j-mid]=num[j];
         }
-        mergeSort(left,mid);    //×ó°ë²¿·Ö
-        mergeSort(right,n-mid); //ÓÒ°ë²¿·Ö
-        merge(num,left,right,mid,n-mid); //¶ÔÁ½¸öÓĞĞòĞòÁĞ½øĞĞºÏ²¢
+        mergeSort(left,mid);    //å·¦åŠéƒ¨åˆ†
+        mergeSort(right,n-mid); //å³åŠéƒ¨åˆ†
+        merge(num,left,right,mid,n-mid); //å¯¹ä¸¤ä¸ªæœ‰åºåºåˆ—è¿›è¡Œåˆå¹¶
         free(right);
         free(left);
     }
 }
 
-void quickSort(int a[], int low,int high)//¿ìËÙÅÅĞò
+void quickSort(int a[], int low,int high)//å¿«é€Ÿæ’åº
 {
-    if(low<high)//µİ¹éÖÕÖ¹Ìõ¼ş
+    if(low<high)//é€’å½’ç»ˆæ­¢æ¡ä»¶
     {
         int i=low,j=high;
-        int target=a[low];//´ıÅÅĞòÊı×éµÄµÚÒ»¸öÊıÎªÄ¿±êÊıtarget
+        int target=a[low];//å¾…æ’åºæ•°ç»„çš„ç¬¬ä¸€ä¸ªæ•°ä¸ºç›®æ ‡æ•°target
         while(i<j)
         {
-            while(i<j&&a[j]>=target)
-                j--;//ÓÒ²à
+            while(i<j&&a[j]>=target){
+                j--;//å³ä¾§
+                count3++;
+            }
             if(i<j)
                 a[i++]=a[j];
-            while(i<j&&a[i]<=target)
-                i++;//×ó²à
+            while(i<j&&a[i]<=target){
+                i++;//å·¦ä¾§
+                count3++;
+            }
             if(i<j)
                 a[j--]=a[i];
         }
-        a[i]=target;//°ÑÄ¿±êÊı¸³Öµµ½ÏÂ±êiµÄÎ»ÖÃ
-        quickSort(a,low,i-1);//µİ¹é¶ÔÄ¿±êÊı×ó¡¢ÓÒÊı×Ö½øĞĞÅÅĞò
+        a[i]=target;//æŠŠç›®æ ‡æ•°èµ‹å€¼åˆ°ä¸‹æ ‡içš„ä½ç½®
+        quickSort(a,low,i-1);//é€’å½’å¯¹ç›®æ ‡æ•°å·¦ã€å³æ•°å­—è¿›è¡Œæ’åº
         quickSort(a,i+1,high);
     }
 }
 
-void print(int arr[], int n)//Êä³öº¯Êı
+void print(int arr[], int n)//è¾“å‡ºå‡½æ•°
 {
     for(int j=0; j<n; j++)
     {
@@ -92,38 +99,44 @@ int main()
 {
     int n,a[100000],b[10000],c[10000];
     double l1, m1,l2, m2,l3, m3;
-    cout<<"ÇëÊäÈëÒªÉú³ÉËæ»úÊı¸öÊıµÄ²ÎÊın£º";
+    cout<<"è¯·è¾“å…¥è¦ç”Ÿæˆéšæœºæ•°ä¸ªæ•°çš„å‚æ•°nï¼š";
     cin>>n;
     srand(time(0));
     for(int i=0; i<n; i++)
         a[i]=1+rand()%n;
     cout<<"*********************************************************************************************************************** \n";
-    cout<<"Ëæ»úÊı×éÎª£º\n";
+    cout<<"éšæœºæ•°ç»„ä¸ºï¼š\n";
     print(a,n);
     cout<<"*********************************************************************************************************************** \n";
     memcpy(b,a,sizeof(b));
     memcpy(c,a,sizeof(b));
     l1=(double)clock();
-    BubbleSort(a,n);//Ã°ÅİÅÅĞòº¯Êı
-    cout<<"Ã°ÅİÅÅĞòºóÊı×éÈçÏÂ£º\n";
+    BubbleSort(a,n);//å†’æ³¡æ’åºå‡½æ•°
+    cout<<"å†’æ³¡æ’åºåæ•°ç»„å¦‚ä¸‹ï¼š\n";
     print(a,n);
-    cout<<"ÅÅĞòºÄ·ÑµÄÊ±¼äÎª£º\n";
+    cout<<"å†’æ³¡æ’åºåŸºæœ¬æ“ä½œçš„æ¬¡æ•°ä¸ºï¼š\n";
+    printf("%d\n", count1);
+    cout<<"å†’æ³¡æ’åºè€—è´¹çš„æ—¶é—´ä¸ºï¼š\n";
     m1=(double)clock();
     printf("%.4fms\n", (m1-l1));
     l2=(double)clock();
-    mergeSort(b,n);//ºÏ²¢ÅÅĞòº¯Êı
+    mergeSort(b,n);//åˆå¹¶æ’åºå‡½æ•°
     cout<<"*********************************************************************************************************************** \n";
-    cout<<"ºÏ²¢ÅÅĞòºóÉú³ÉµÄÊı×éÎª£º\n";
+    cout<<"åˆå¹¶æ’åºåç”Ÿæˆçš„æ•°ç»„ä¸ºï¼š\n";
     print(b,n);
-    cout<<"ÅÅĞòºÄ·ÑµÄÊ±¼äÎª£º\n";
+    cout<<"åˆå¹¶æ’åºåŸºæœ¬æ“ä½œçš„æ¬¡æ•°ä¸ºï¼š\n";
+    printf("%d\n", count2);
+    cout<<"åˆå¹¶æ’åºè€—è´¹çš„æ—¶é—´ä¸ºï¼š\n";
     m2=(double)clock();
     printf("%.4fms\n", (m2-l2));
     l3=(double)clock();
-    quickSort(c,0,n-1);//¿ìËÙÅÅĞòº¯Êı
+    quickSort(c,0,n-1);//å¿«é€Ÿæ’åºå‡½æ•°
     cout<<"*********************************************************************************************************************** \n";
-    cout<<"¿ìËÙÅÅĞòºóÉú³ÉµÄÊı×éÎª£º\n";
+    cout<<"å¿«é€Ÿæ’åºåç”Ÿæˆçš„æ•°ç»„ä¸ºï¼š\n";
     print(c,n);
-    cout<<"ÅÅĞòºÄ·ÑµÄÊ±¼äÎª£º\n";
+    cout<<"å¿«é€Ÿæ’åºåŸºæœ¬æ“ä½œçš„æ¬¡æ•°ä¸ºï¼š\n";
+    printf("%d\n", count3);
+    cout<<"å¿«é€Ÿæ’åºè€—è´¹çš„æ—¶é—´ä¸ºï¼š\n";
     m3=(double)clock();
     printf("%.4fms\n", (m3-l3));
     return 0;
